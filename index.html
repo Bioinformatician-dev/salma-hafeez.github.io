@@ -7,575 +7,124 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0f0d;
-    --bg2: #111a15;
-    --bg3: #162019;
-    --surface: #1a2820;
-    --surface2: #203328;
-    --accent: #4ade80;
-    --accent2: #86efac;
-    --accent3: #bbf7d0;
-    --text: #f0faf3;
-    --text2: #a3c9b0;
-    --text3: #5a8a6a;
-    --border: rgba(74,222,128,0.12);
-    --border2: rgba(74,222,128,0.22);
-    --font-head: 'DM Serif Display', Georgia, serif;
-    --font-body: 'Outfit', sans-serif;
-    --font-mono: 'DM Mono', monospace;
+    --bg:#08070f;--bg2:#0f0d1c;--bg3:#141228;
+    --surface:#1a1730;--surface2:#201d3a;
+    --accent:#a78bfa;--accent2:#c4b5fd;--accent3:#ddd6fe;--accent4:#7c3aed;
+    --pink:#f472b6;--teal:#2dd4bf;
+    --text:#f5f3ff;--text2:#b8aee8;--text3:#6d5fa8;
+    --border:rgba(167,139,250,0.13);--border2:rgba(167,139,250,0.25);
+    --font-head:'DM Serif Display',Georgia,serif;
+    --font-body:'Outfit',sans-serif;
+    --font-mono:'DM Mono',monospace;
   }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: 16px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  :target{outline:none;background:transparent!important;box-shadow:none!important}
+  body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(167,139,250,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(167,139,250,0.04) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0}
 
-  /* Animated background grid */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
-    background-size: 48px 48px;
-    pointer-events: none;
-    z-index: 0;
-  }
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:64px;background:rgba(8,7,15,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+  .nav-logo{font-family:var(--font-head);font-size:18px;color:var(--text);text-decoration:none}
+  .nav-logo span{color:var(--accent)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-size:13px;font-weight:500;color:var(--text2);text-decoration:none;letter-spacing:0.06em;text-transform:uppercase;transition:color .2s}
+  .nav-links a:hover{color:var(--accent)}
+  .nav-cta{font-size:13px;font-weight:500;color:var(--bg);background:var(--accent);padding:8px 20px;border-radius:4px;text-decoration:none;transition:opacity .2s}
+  .nav-cta:hover{opacity:.85}
 
-  /* NAV */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 2.5rem;
-    height: 64px;
-    background: rgba(10,15,13,0.88);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo {
-    font-family: var(--font-head);
-    font-size: 18px;
-    color: var(--text);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-  }
-  .nav-logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
-  .nav-links a {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text2);
-    text-decoration: none;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--accent); }
-  .nav-cta {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--bg);
-    background: var(--accent);
-    padding: 8px 20px;
-    border-radius: 4px;
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: opacity 0.2s;
-  }
-  .nav-cta:hover { opacity: 0.85; }
+  .hero{position:relative;z-index:1;min-height:100vh;display:grid;grid-template-columns:1fr 400px;align-items:center;gap:4rem;padding:6rem 2.5rem 4rem;max-width:1100px;margin:0 auto}
+  .hero-name{font-family:var(--font-head);font-size:clamp(52px,8vw,96px);font-weight:400;line-height:1.0;color:var(--text);letter-spacing:-0.01em}
+  .hero-name em{font-style:italic;color:var(--accent2)}
+  .hero-tagline{font-size:clamp(15px,2vw,18px);color:var(--text2);margin-top:1.5rem;max-width:560px;font-weight:300}
+  .hero-tagline strong{color:var(--text);font-weight:500}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2rem}
+  .hero-tag{font-family:var(--font-mono);font-size:11px;padding:5px 12px;border:1px solid var(--border2);border-radius:3px;color:var(--accent2);letter-spacing:0.06em}
+  .hero-actions{display:flex;gap:14px;margin-top:2.5rem;flex-wrap:wrap}
+  .btn-primary{font-size:14px;font-weight:500;color:var(--bg);background:var(--accent);padding:12px 28px;border-radius:4px;text-decoration:none;transition:opacity .2s}
+  .btn-primary:hover{opacity:.85}
+  .btn-ghost{font-size:14px;font-weight:500;color:var(--text2);background:transparent;padding:12px 28px;border-radius:4px;border:1px solid var(--border2);text-decoration:none;transition:all .2s}
+  .btn-ghost:hover{color:var(--accent);border-color:var(--accent)}
+  .hero-stats{display:flex;gap:3rem;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border)}
+  .hero-stat-num{font-family:var(--font-head);font-size:36px;color:var(--accent);line-height:1}
+  .hero-stat-label{font-size:12px;color:var(--text3);margin-top:4px;text-transform:uppercase;letter-spacing:0.08em}
+  .hero-visual{display:flex;align-items:center;justify-content:center}
+  #dnaCanvas{width:380px;height:420px}
 
-  /* HERO */
-  .hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 6rem 2.5rem 4rem;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-  .hero-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--accent);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .hero-eyebrow::before {
-    content: '';
-    display: inline-block;
-    width: 32px;
-    height: 1px;
-    background: var(--accent);
-  }
-  .hero-name {
-    font-family: var(--font-head);
-    font-size: clamp(52px, 8vw, 96px);
-    font-weight: 400;
-    line-height: 1.0;
-    color: var(--text);
-    letter-spacing: -0.01em;
-  }
-  .hero-name em {
-    font-style: italic;
-    color: var(--accent2);
-  }
-  .hero-tagline {
-    font-size: clamp(15px, 2vw, 18px);
-    color: var(--text2);
-    margin-top: 1.5rem;
-    max-width: 600px;
-    font-weight: 300;
-  }
-  .hero-tagline strong { color: var(--text); font-weight: 500; }
-  .hero-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 2rem;
-  }
-  .hero-tag {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    padding: 5px 12px;
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    color: var(--accent2);
-    letter-spacing: 0.06em;
-  }
-  .hero-actions {
-    display: flex;
-    gap: 14px;
-    margin-top: 2.5rem;
-    flex-wrap: wrap;
-  }
-  .btn-primary {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--bg);
-    background: var(--accent);
-    padding: 12px 28px;
-    border-radius: 4px;
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: opacity 0.2s;
-  }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-ghost {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text2);
-    background: transparent;
-    padding: 12px 28px;
-    border-radius: 4px;
-    border: 1px solid var(--border2);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-    transition: all 0.2s;
-  }
-  .btn-ghost:hover { color: var(--accent); border-color: var(--accent); }
-  .hero-stats {
-    display: flex;
-    gap: 3rem;
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
-  }
-  .hero-stat-num {
-    font-family: var(--font-head);
-    font-size: 36px;
-    color: var(--accent);
-    line-height: 1;
-  }
-  .hero-stat-label {
-    font-size: 12px;
-    color: var(--text3);
-    margin-top: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-  }
+  .bio-banner{position:relative;z-index:1;width:100%;overflow:hidden;height:150px}
+  #networkCanvas{display:block;width:100%;height:150px}
 
-  /* SECTIONS */
-  section {
-    position: relative;
-    z-index: 1;
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 6rem 2.5rem;
-  }
-  .section-label {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .section-label::before {
-    content: '';
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background: var(--accent);
-  }
-  .section-title {
-    font-family: var(--font-head);
-    font-size: clamp(32px, 5vw, 52px);
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 3rem;
-    line-height: 1.1;
-  }
-  .section-title em { font-style: italic; color: var(--accent2); }
+  section{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:6rem 2.5rem}
+  .section-title{font-family:var(--font-head);font-size:clamp(32px,5vw,52px);font-weight:400;color:var(--text);margin-bottom:3rem;line-height:1.1}
+  .section-title em{font-style:italic;color:var(--accent2)}
 
-  /* EXPERIENCE */
-  .exp-item {
-    display: grid;
-    grid-template-columns: 1fr 3fr;
-    gap: 3rem;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid var(--border);
-    animation: fadeUp 0.5s ease both;
-  }
-  .exp-item:first-of-type { border-top: 1px solid var(--border); }
-  .exp-meta { padding-top: 4px; }
-  .exp-date {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text3);
-    letter-spacing: 0.06em;
-  }
-  .exp-org {
-    font-size: 13px;
-    color: var(--accent2);
-    margin-top: 6px;
-    font-weight: 500;
-  }
-  .exp-title {
-    font-size: 20px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 1rem;
-  }
-  .exp-bullets { list-style: none; }
-  .exp-bullets li {
-    font-size: 14px;
-    color: var(--text2);
-    padding: 5px 0 5px 20px;
-    position: relative;
-    line-height: 1.65;
-  }
-  .exp-bullets li::before {
-    content: '→';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 12px;
-    top: 7px;
-  }
-  .exp-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 1rem;
-  }
-  .exp-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 3px 10px;
-    border: 1px solid var(--border);
-    border-radius: 2px;
-    color: var(--text3);
-    letter-spacing: 0.06em;
-  }
+  .exp-item{display:grid;grid-template-columns:1fr 3fr;gap:3rem;padding:2.5rem 0;border-bottom:1px solid var(--border)}
+  .exp-item:first-of-type{border-top:1px solid var(--border)}
+  .exp-date{font-family:var(--font-mono);font-size:12px;color:var(--text3);letter-spacing:0.06em}
+  .exp-org{font-size:13px;color:var(--accent2);margin-top:6px;font-weight:500}
+  .exp-title{font-size:20px;font-weight:500;color:var(--text);margin-bottom:1rem}
+  .exp-bullets{list-style:none}
+  .exp-bullets li{font-size:14px;color:var(--text2);padding:5px 0 5px 20px;position:relative;line-height:1.65}
+  .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:12px;top:7px}
+  .exp-tags,.proj-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:1rem}
+  .exp-tag{font-family:var(--font-mono);font-size:10px;padding:3px 10px;border:1px solid var(--border);border-radius:2px;color:var(--text3);letter-spacing:0.06em}
 
-  /* SKILLS */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .skill-block {
-    background: var(--bg2);
-    padding: 2rem;
-    transition: background 0.2s;
-  }
-  .skill-block:hover { background: var(--surface); }
-  .skill-block-title {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 1.25rem;
-  }
-  .skill-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-  .skill-name {
-    font-size: 13px;
-    color: var(--text2);
-    width: 160px;
-    flex-shrink: 0;
-  }
-  .skill-track {
-    flex: 1;
-    height: 3px;
-    background: var(--surface2);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .skill-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent3), var(--accent));
-    border-radius: 2px;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.8s cubic-bezier(0.4,0,0.2,1);
-  }
-  .skill-fill.animated { transform: scaleX(1); }
-  .skill-pct {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text3);
-    width: 30px;
-    text-align: right;
-  }
-  .db-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 2rem;
-  }
-  .db-tag {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    padding: 6px 14px;
-    border: 1px solid var(--border2);
-    border-radius: 3px;
-    color: var(--accent2);
-    background: var(--surface);
-  }
+  .skills-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .skill-block{background:var(--bg2);padding:2rem;transition:background .2s}
+  .skill-block:hover{background:var(--surface)}
+  .skill-block-title{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem}
+  .skill-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .skill-name{font-size:13px;color:var(--text2);width:160px;flex-shrink:0}
+  .skill-track{flex:1;height:3px;background:var(--surface2);border-radius:2px;overflow:hidden}
+  .skill-fill{height:100%;background:linear-gradient(90deg,var(--accent4),var(--accent),var(--accent2));border-radius:2px;width:0%;transition:width .9s cubic-bezier(.4,0,.2,1)}
+  .skill-pct{font-family:var(--font-mono);font-size:11px;color:var(--text3);width:30px;text-align:right}
+  .db-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:2rem}
+  .db-tag{font-family:var(--font-mono);font-size:12px;padding:6px 14px;border:1px solid var(--border2);border-radius:3px;color:var(--accent2);background:var(--surface)}
 
-  /* PUBLICATIONS */
-  .pub-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 8px; overflow: hidden; }
-  .pub-item {
-    background: var(--bg2);
-    padding: 2rem;
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    gap: 2rem;
-    transition: background 0.2s;
-  }
-  .pub-item:hover { background: var(--surface); }
-  .pub-badge {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 4px 10px;
-    border-radius: 3px;
-    letter-spacing: 0.06em;
-    text-align: center;
-    align-self: start;
-    margin-top: 4px;
-  }
-  .pub-badge.published { background: rgba(74,222,128,0.12); color: var(--accent); border: 1px solid rgba(74,222,128,0.2); }
-  .pub-badge.review { background: rgba(251,191,36,0.08); color: #fbbf24; border: 1px solid rgba(251,191,36,0.2); }
-  .pub-title {
-    font-size: 16px;
-    font-weight: 500;
-    color: var(--text);
-    line-height: 1.45;
-    margin-bottom: 6px;
-  }
-  .pub-meta { font-size: 13px; color: var(--text3); }
-  .pub-meta em { color: var(--text2); font-style: normal; }
-  .pub-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
-  .pub-tag {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 2px 8px;
-    border: 1px solid var(--border);
-    color: var(--text3);
-    border-radius: 2px;
-  }
+  .pub-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border-radius:8px;overflow:hidden}
+  .pub-item{background:var(--bg2);padding:2rem;display:grid;grid-template-columns:90px 1fr;gap:2rem;transition:background .2s}
+  .pub-item:hover{background:var(--surface)}
+  .pub-badge{font-family:var(--font-mono);font-size:10px;padding:4px 10px;border-radius:3px;letter-spacing:0.06em;text-align:center;align-self:start;margin-top:4px}
+  .pub-badge.published{background:rgba(167,139,250,0.12);color:var(--accent);border:1px solid rgba(167,139,250,0.25)}
+  .pub-badge.review{background:rgba(244,114,182,0.08);color:var(--pink);border:1px solid rgba(244,114,182,0.2)}
+  .pub-title{font-size:16px;font-weight:500;color:var(--text);line-height:1.45;margin-bottom:6px}
+  .pub-meta{font-size:13px;color:var(--text3)}
+  .pub-meta em{color:var(--text2);font-style:normal}
+  .pub-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+  .pub-tag{font-family:var(--font-mono);font-size:10px;padding:2px 8px;border:1px solid var(--border);color:var(--text3);border-radius:2px}
 
-  /* PROJECTS */
-  .proj-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  .proj-item {
-    background: var(--bg2);
-    padding: 2rem;
-    transition: background 0.2s;
-    display: flex;
-    flex-direction: column;
-  }
-  .proj-item:hover { background: var(--surface); }
-  .proj-num {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text3);
-    margin-bottom: 1rem;
-    letter-spacing: 0.06em;
-  }
-  .proj-title {
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--text);
-    margin-bottom: 0.75rem;
-    line-height: 1.3;
-  }
-  .proj-desc {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.65;
-    flex: 1;
-  }
-  .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 1rem; }
-  .proj-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--accent);
-    text-decoration: none;
-    letter-spacing: 0.04em;
-  }
-  .proj-link:hover { text-decoration: underline; }
+  .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden}
+  .proj-item{background:var(--bg2);padding:2rem;transition:background .2s;display:flex;flex-direction:column}
+  .proj-item:hover{background:var(--surface)}
+  .proj-num{font-family:var(--font-mono);font-size:11px;color:var(--text3);margin-bottom:1rem;letter-spacing:0.06em}
+  .proj-title{font-size:18px;font-weight:500;color:var(--text);margin-bottom:.75rem;line-height:1.3}
+  .proj-desc{font-size:13px;color:var(--text2);line-height:1.65;flex:1}
+  .proj-link{display:inline-flex;align-items:center;gap:6px;margin-top:1.25rem;font-family:var(--font-mono);font-size:12px;color:var(--accent);text-decoration:none}
+  .proj-link:hover{text-decoration:underline}
 
-  /* TRAINING */
-  .training-list { display: flex; flex-direction: column; }
-  .training-item {
-    display: grid;
-    grid-template-columns: 60px 1fr;
-    gap: 2rem;
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--border);
-    align-items: start;
-  }
-  .training-year {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text3);
-    padding-top: 3px;
-    letter-spacing: 0.04em;
-  }
-  .training-name {
-    font-size: 15px;
-    color: var(--text);
-    font-weight: 400;
-    line-height: 1.4;
-  }
-  .training-org {
-    font-size: 12px;
-    color: var(--text3);
-    margin-top: 3px;
-    font-family: var(--font-mono);
-  }
-  .training-badge {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    padding: 2px 8px;
-    background: rgba(74,222,128,0.08);
-    border: 1px solid rgba(74,222,128,0.15);
-    color: var(--accent);
-    border-radius: 2px;
-    letter-spacing: 0.08em;
-    margin-left: 8px;
-    vertical-align: middle;
-  }
+  .training-list{display:flex;flex-direction:column}
+  .training-item{display:grid;grid-template-columns:60px 1fr;gap:2rem;padding:1.5rem 0;border-bottom:1px solid var(--border);align-items:start}
+  .training-year{font-family:var(--font-mono);font-size:12px;color:var(--text3);padding-top:3px;letter-spacing:0.04em}
+  .training-name{font-size:15px;color:var(--text);font-weight:400;line-height:1.4}
+  .training-org{font-size:12px;color:var(--text3);margin-top:3px;font-family:var(--font-mono)}
+  .training-badge{display:inline-block;font-family:var(--font-mono);font-size:9px;padding:2px 8px;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);color:var(--accent);border-radius:2px;letter-spacing:0.08em;margin-left:8px;vertical-align:middle}
 
-  /* FOOTER */
-  footer {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--border);
-    padding: 3rem 2.5rem;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  .footer-name {
-    font-family: var(--font-head);
-    font-size: 20px;
-    color: var(--text);
-  }
-  .footer-name span { color: var(--accent); }
-  .footer-links { display: flex; gap: 1.5rem; }
-  .footer-links a { font-size: 13px; color: var(--text3); text-decoration: none; }
-  .footer-links a:hover { color: var(--accent); }
-  .footer-copy { font-size: 12px; color: var(--text3); font-family: var(--font-mono); }
+  footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:3rem 2.5rem;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+  .footer-name{font-family:var(--font-head);font-size:20px;color:var(--text)}
+  .footer-name span{color:var(--accent)}
+  .footer-links{display:flex;gap:1.5rem}
+  .footer-links a{font-size:13px;color:var(--text3);text-decoration:none}
+  .footer-links a:hover{color:var(--accent)}
+  .footer-copy{font-size:12px;color:var(--text3);font-family:var(--font-mono)}
 
-  /* ANIMATIONS */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade-in { animation: fadeUp 0.6s ease both; }
-  .fade-in-2 { animation: fadeUp 0.6s 0.1s ease both; }
-  .fade-in-3 { animation: fadeUp 0.6s 0.2s ease both; }
-  .fade-in-4 { animation: fadeUp 0.6s 0.3s ease both; }
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .fade-in  {animation:fadeUp .6s ease both}
+  .fade-in-2{animation:fadeUp .6s .1s ease both}
+  .fade-in-3{animation:fadeUp .6s .2s ease both}
+  .fade-in-4{animation:fadeUp .6s .3s ease both}
+  .section-divider{max-width:1100px;margin:0 auto;border:none;border-top:1px solid var(--border)}
 
-  /* MOBILE */
-  @media (max-width: 680px) {
-    nav { padding: 0 1.25rem; }
-    .nav-links, .nav-cta { display: none; }
-    .hero { padding: 5rem 1.25rem 3rem; }
-    .hero-stats { flex-wrap: wrap; gap: 2rem; }
-    section { padding: 4rem 1.25rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .proj-grid { grid-template-columns: 1fr; }
-    .pub-item { grid-template-columns: 1fr; gap: 0.75rem; }
-    footer { flex-direction: column; align-items: flex-start; }
-  }
-
-  /* DIVIDER */
-  .section-divider {
-    max-width: 1100px;
-    margin: 0 auto;
-    border: none;
-    border-top: 1px solid var(--border);
-  }
+  @media(max-width:800px){.hero{grid-template-columns:1fr}.hero-visual{display:none}}
+  @media(max-width:680px){nav{padding:0 1.25rem}.nav-links,.nav-cta{display:none}.hero{padding:5rem 1.25rem 3rem}.hero-stats{flex-wrap:wrap;gap:2rem}section{padding:4rem 1.25rem}.exp-item{grid-template-columns:1fr;gap:.5rem}.skills-grid{grid-template-columns:1fr}.proj-grid{grid-template-columns:1fr}.pub-item{grid-template-columns:1fr;gap:.75rem}footer{flex-direction:column;align-items:flex-start}}
 </style>
 </head>
 <body>
@@ -583,68 +132,47 @@
 <nav>
   <a class="nav-logo" href="#">Salma <span>Hafeez</span></a>
   <ul class="nav-links">
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#publications">Publications</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#training">Training</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('experience')">Experience</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('skills')">Skills</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('publications')">Publications</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('projects')">Projects</a></li>
+    <li><a href="javascript:void(0)" onclick="navTo('training')">Training</a></li>
   </ul>
   <a class="nav-cta" href="mailto:salmahafeez575@gmail.com">Get in touch</a>
 </nav>
 
-<!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow fade-in">Bioinformatician · Open to Industry Roles</div>
-  <h1 class="hero-name fade-in-2">Salma<br><em>Hafeez</em></h1>
-  <p class="hero-tagline fade-in-3">
-    Specializing in <strong>cancer genomics</strong>, <strong>RNA-seq & scRNA-seq</strong>, and <strong>reproducible pipeline development</strong>. I build end-to-end computational workflows that translate raw sequencing data into biological insight.
-  </p>
-  <div class="hero-tags fade-in-4">
-    <span class="hero-tag">RNA-seq</span>
-    <span class="hero-tag">scRNA-seq</span>
-    <span class="hero-tag">ChIP-seq</span>
-    <span class="hero-tag">Multi-omics</span>
-    <span class="hero-tag">Snakemake</span>
-    <span class="hero-tag">Nextflow</span>
-    <span class="hero-tag">Docker</span>
-    <span class="hero-tag">GATK</span>
-    <span class="hero-tag">Python · R</span>
-    <span class="hero-tag">Deep Learning</span>
+  <div>
+    <h1 class="hero-name fade-in">Salma<br><em>Hafeez</em></h1>
+    <p class="hero-tagline fade-in-2">Specializing in <strong>cancer genomics</strong>, <strong>RNA-seq & scRNA-seq</strong>, and <strong>reproducible pipeline development</strong>. I build end-to-end computational workflows that translate raw sequencing data into biological insight.</p>
+    <div class="hero-tags fade-in-3">
+      <span class="hero-tag">RNA-seq</span><span class="hero-tag">scRNA-seq</span><span class="hero-tag">ChIP-seq</span><span class="hero-tag">Multi-omics</span><span class="hero-tag">Snakemake</span><span class="hero-tag">Nextflow</span><span class="hero-tag">Docker</span><span class="hero-tag">GATK</span><span class="hero-tag">Python · R</span><span class="hero-tag">Deep Learning</span>
+    </div>
+    <div class="hero-actions fade-in-4">
+      <a class="btn-primary" href="mailto:salmahafeez575@gmail.com">Contact me</a>
+      <a class="btn-ghost" href="https://www.linkedin.com/in/salma-hafeez/" target="_blank">LinkedIn</a>
+      <a class="btn-ghost" href="https://github.com/Bioinformatician-dev" target="_blank">GitHub</a>
+    </div>
+    <div class="hero-stats fade-in-4">
+      <div><div class="hero-stat-num">2×</div><div class="hero-stat-label">First Class Honors</div></div>
+      <div><div class="hero-stat-num">3</div><div class="hero-stat-label">Research roles</div></div>
+      <div><div class="hero-stat-num">3+</div><div class="hero-stat-label">Publications</div></div>
+      <div><div class="hero-stat-num">6</div><div class="hero-stat-label">Workshops</div></div>
+    </div>
   </div>
-  <div class="hero-actions fade-in-4">
-    <a class="btn-primary" href="mailto:salmahafeez575@gmail.com">Contact me</a>
-    <a class="btn-ghost" href="https://www.linkedin.com/in/salma-hafeez/" target="_blank">LinkedIn</a>
-    <a class="btn-ghost" href="https://github.com/Bioinformatician-dev" target="_blank">GitHub</a>
-  </div>
-  <div class="hero-stats fade-in-4">
-    <div>
-      <div class="hero-stat-num">2×</div>
-      <div class="hero-stat-label">First Class Honors</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">3</div>
-      <div class="hero-stat-label">Research roles</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">3+</div>
-      <div class="hero-stat-label">Publications</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">6</div>
-      <div class="hero-stat-label">Workshops & trainings</div>
-    </div>
+  <div class="hero-visual fade-in-3">
+    <canvas id="dnaCanvas" width="380" height="420"></canvas>
   </div>
 </div>
 
 <hr class="section-divider">
+<div class="bio-banner"><canvas id="networkCanvas"></canvas></div>
+<hr class="section-divider">
 
-<!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-label">Work history</div>
   <h2 class="section-title">Research <em>experience</em></h2>
-
   <div class="exp-item">
-    <div class="exp-meta">
+    <div>
       <div class="exp-date">Feb – Apr 2024</div>
       <div class="exp-org">NUST, Islamabad</div>
     </div>
@@ -656,20 +184,11 @@
         <li>Ran functional enrichment analysis to surface potential therapeutic targets, bridging computational outputs to wet-lab experimental priorities.</li>
         <li>Contributed to genomics and structural bioinformatics workflows for ongoing research publications.</li>
       </ul>
-      <div class="exp-tags">
-        <span class="exp-tag">RNA-seq</span>
-        <span class="exp-tag">scRNA-seq</span>
-        <span class="exp-tag">Snakemake</span>
-        <span class="exp-tag">Nextflow</span>
-        <span class="exp-tag">Docker</span>
-        <span class="exp-tag">Cancer genomics</span>
-        <span class="exp-tag">Pathway analysis</span>
-      </div>
+      <div class="exp-tags"><span class="exp-tag">RNA-seq</span><span class="exp-tag">scRNA-seq</span><span class="exp-tag">Snakemake</span><span class="exp-tag">Nextflow</span><span class="exp-tag">Docker</span><span class="exp-tag">Cancer genomics</span><span class="exp-tag">Pathway analysis</span></div>
     </div>
   </div>
-
   <div class="exp-item">
-    <div class="exp-meta">
+    <div>
       <div class="exp-date">Feb 2022 – Jan 2024</div>
       <div class="exp-org">COMSATS, Islamabad</div>
     </div>
@@ -681,18 +200,11 @@
         <li>Co-authored peer-reviewed research on NEU3 Sialidase–EGFR interaction in NSCLC (<em>Journal of Computational Biophysics and Chemistry</em>, 2024).</li>
         <li>Contributing to a liver carcinoma biomarker manuscript currently under review.</li>
       </ul>
-      <div class="exp-tags">
-        <span class="exp-tag">Multi-omics</span>
-        <span class="exp-tag">ML</span>
-        <span class="exp-tag">Pathway enrichment</span>
-        <span class="exp-tag">Network analysis</span>
-        <span class="exp-tag">Scientific writing</span>
-      </div>
+      <div class="exp-tags"><span class="exp-tag">Multi-omics</span><span class="exp-tag">ML</span><span class="exp-tag">Pathway enrichment</span><span class="exp-tag">Network analysis</span><span class="exp-tag">Scientific writing</span></div>
     </div>
   </div>
-
   <div class="exp-item">
-    <div class="exp-meta">
+    <div>
       <div class="exp-date">May – Aug 2021</div>
       <div class="exp-org">Biocode Ltd., Islamabad</div>
     </div>
@@ -703,88 +215,61 @@
         <li>Built and executed NGS-adjacent workflows including variant-aware pipelines and structural bioinformatics analyses (protein modeling and docking).</li>
         <li>Completed hands-on NGS Cancer Genomics training during tenure, reinforcing production-level tool fluency.</li>
       </ul>
-      <div class="exp-tags">
-        <span class="exp-tag">Python</span>
-        <span class="exp-tag">R</span>
-        <span class="exp-tag">NGS</span>
-        <span class="exp-tag">Variant calling</span>
-        <span class="exp-tag">Structural bioinformatics</span>
-      </div>
+      <div class="exp-tags"><span class="exp-tag">Python</span><span class="exp-tag">R</span><span class="exp-tag">NGS</span><span class="exp-tag">Variant calling</span><span class="exp-tag">Structural bioinformatics</span></div>
     </div>
   </div>
 </section>
 
 <hr class="section-divider">
 
-<!-- SKILLS -->
 <section id="skills">
-  <div class="section-label">Capabilities</div>
   <h2 class="section-title">Computational <em>skills</em></h2>
-
-  <div class="skills-grid" id="skillsGrid">
+  <div class="skills-grid">
     <div class="skill-block">
       <div class="skill-block-title">NGS & Transcriptomics</div>
-      <div class="skill-row"><span class="skill-name">Bulk RNA-seq</span><div class="skill-track"><div class="skill-fill" style="--w:0.95" data-w="0.95"></div></div><span class="skill-pct">95%</span></div>
-      <div class="skill-row"><span class="skill-name">scRNA-seq</span><div class="skill-track"><div class="skill-fill" style="--w:0.90" data-w="0.90"></div></div><span class="skill-pct">90%</span></div>
-      <div class="skill-row"><span class="skill-name">ChIP-seq</span><div class="skill-track"><div class="skill-fill" style="--w:0.75" data-w="0.75"></div></div><span class="skill-pct">75%</span></div>
-      <div class="skill-row"><span class="skill-name">Diff. expression</span><div class="skill-track"><div class="skill-fill" style="--w:0.92" data-w="0.92"></div></div><span class="skill-pct">92%</span></div>
+      <div class="skill-row"><span class="skill-name">Bulk RNA-seq</span><div class="skill-track"><div class="skill-fill" data-w="95"></div></div><span class="skill-pct">95%</span></div>
+      <div class="skill-row"><span class="skill-name">scRNA-seq</span><div class="skill-track"><div class="skill-fill" data-w="90"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-row"><span class="skill-name">ChIP-seq</span><div class="skill-track"><div class="skill-fill" data-w="75"></div></div><span class="skill-pct">75%</span></div>
+      <div class="skill-row"><span class="skill-name">Diff. expression</span><div class="skill-track"><div class="skill-fill" data-w="92"></div></div><span class="skill-pct">92%</span></div>
     </div>
     <div class="skill-block">
       <div class="skill-block-title">Programming</div>
-      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-track"><div class="skill-fill" data-w="0.88"></div></div><span class="skill-pct">88%</span></div>
-      <div class="skill-row"><span class="skill-name">R / Bioconductor</span><div class="skill-track"><div class="skill-fill" data-w="0.90"></div></div><span class="skill-pct">90%</span></div>
-      <div class="skill-row"><span class="skill-name">Bash / Linux</span><div class="skill-track"><div class="skill-fill" data-w="0.85"></div></div><span class="skill-pct">85%</span></div>
-      <div class="skill-row"><span class="skill-name">Perl</span><div class="skill-track"><div class="skill-fill" data-w="0.65"></div></div><span class="skill-pct">65%</span></div>
+      <div class="skill-row"><span class="skill-name">Python</span><div class="skill-track"><div class="skill-fill" data-w="88"></div></div><span class="skill-pct">88%</span></div>
+      <div class="skill-row"><span class="skill-name">R / Bioconductor</span><div class="skill-track"><div class="skill-fill" data-w="90"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-row"><span class="skill-name">Bash / Linux</span><div class="skill-track"><div class="skill-fill" data-w="85"></div></div><span class="skill-pct">85%</span></div>
+      <div class="skill-row"><span class="skill-name">Perl</span><div class="skill-track"><div class="skill-fill" data-w="65"></div></div><span class="skill-pct">65%</span></div>
     </div>
     <div class="skill-block">
       <div class="skill-block-title">Pipelines & Reproducibility</div>
-      <div class="skill-row"><span class="skill-name">Snakemake</span><div class="skill-track"><div class="skill-fill" data-w="0.88"></div></div><span class="skill-pct">88%</span></div>
-      <div class="skill-row"><span class="skill-name">Nextflow</span><div class="skill-track"><div class="skill-fill" data-w="0.82"></div></div><span class="skill-pct">82%</span></div>
-      <div class="skill-row"><span class="skill-name">Docker</span><div class="skill-track"><div class="skill-fill" data-w="0.80"></div></div><span class="skill-pct">80%</span></div>
-      <div class="skill-row"><span class="skill-name">Git / GitHub</span><div class="skill-track"><div class="skill-fill" data-w="0.90"></div></div><span class="skill-pct">90%</span></div>
+      <div class="skill-row"><span class="skill-name">Snakemake</span><div class="skill-track"><div class="skill-fill" data-w="88"></div></div><span class="skill-pct">88%</span></div>
+      <div class="skill-row"><span class="skill-name">Nextflow</span><div class="skill-track"><div class="skill-fill" data-w="82"></div></div><span class="skill-pct">82%</span></div>
+      <div class="skill-row"><span class="skill-name">Docker</span><div class="skill-track"><div class="skill-fill" data-w="80"></div></div><span class="skill-pct">80%</span></div>
+      <div class="skill-row"><span class="skill-name">Git / GitHub</span><div class="skill-track"><div class="skill-fill" data-w="90"></div></div><span class="skill-pct">90%</span></div>
     </div>
     <div class="skill-block">
       <div class="skill-block-title">ML & Variant Analysis</div>
-      <div class="skill-row"><span class="skill-name">scikit-learn</span><div class="skill-track"><div class="skill-fill" data-w="0.82"></div></div><span class="skill-pct">82%</span></div>
-      <div class="skill-row"><span class="skill-name">TensorFlow / DL</span><div class="skill-track"><div class="skill-fill" data-w="0.75"></div></div><span class="skill-pct">75%</span></div>
-      <div class="skill-row"><span class="skill-name">GATK / ANNOVAR</span><div class="skill-track"><div class="skill-fill" data-w="0.78"></div></div><span class="skill-pct">78%</span></div>
-      <div class="skill-row"><span class="skill-name">Multi-omics integration</span><div class="skill-track"><div class="skill-fill" data-w="0.85"></div></div><span class="skill-pct">85%</span></div>
+      <div class="skill-row"><span class="skill-name">scikit-learn</span><div class="skill-track"><div class="skill-fill" data-w="82"></div></div><span class="skill-pct">82%</span></div>
+      <div class="skill-row"><span class="skill-name">TensorFlow / DL</span><div class="skill-track"><div class="skill-fill" data-w="75"></div></div><span class="skill-pct">75%</span></div>
+      <div class="skill-row"><span class="skill-name">GATK / ANNOVAR</span><div class="skill-track"><div class="skill-fill" data-w="78"></div></div><span class="skill-pct">78%</span></div>
+      <div class="skill-row"><span class="skill-name">Multi-omics</span><div class="skill-track"><div class="skill-fill" data-w="85"></div></div><span class="skill-pct">85%</span></div>
     </div>
   </div>
-
   <div class="db-tags">
-    <span class="db-tag">TCGA</span>
-    <span class="db-tag">GEO</span>
-    <span class="db-tag">NCBI</span>
-    <span class="db-tag">Ensembl</span>
-    <span class="db-tag">UCSC</span>
-    <span class="db-tag">UniProt</span>
-    <span class="db-tag">PDB</span>
-    <span class="db-tag">ggplot2</span>
-    <span class="db-tag">Matplotlib</span>
-    <span class="db-tag">Seaborn</span>
+    <span class="db-tag">TCGA</span><span class="db-tag">GEO</span><span class="db-tag">NCBI</span><span class="db-tag">Ensembl</span><span class="db-tag">UCSC</span><span class="db-tag">UniProt</span><span class="db-tag">PDB</span><span class="db-tag">ggplot2</span><span class="db-tag">Matplotlib</span><span class="db-tag">Seaborn</span>
   </div>
 </section>
 
 <hr class="section-divider">
 
-<!-- PUBLICATIONS -->
 <section id="publications">
-  <div class="section-label">Research output</div>
   <h2 class="section-title">Publications & <em>manuscripts</em></h2>
-
   <div class="pub-list">
     <div class="pub-item">
       <span class="pub-badge published">Published<br>2024</span>
       <div>
         <div class="pub-title">Molecular Modeling Studies to Mimic the Binding Hypothesis of NEU3 Sialidase and EGFR in Nonsmall Cell Lung Carcinoma</div>
         <div class="pub-meta">Khalid, A., Hafeez, S., & Jabeen, I. — <em>Journal of Computational Biophysics and Chemistry</em>, 2024</div>
-        <div class="pub-tags">
-          <span class="pub-tag">NSCLC</span>
-          <span class="pub-tag">Molecular modeling</span>
-          <span class="pub-tag">Drug discovery</span>
-          <span class="pub-tag">EGFR</span>
-        </div>
+        <div class="pub-tags"><span class="pub-tag">NSCLC</span><span class="pub-tag">Molecular modeling</span><span class="pub-tag">Drug discovery</span><span class="pub-tag">EGFR</span></div>
       </div>
     </div>
     <div class="pub-item">
@@ -792,11 +277,7 @@
       <div>
         <div class="pub-title">Genetic-driven biomarkers for liver carcinoma through bioinformatics approach</div>
         <div class="pub-meta">Hafeez, S. et al. — Manuscript under review</div>
-        <div class="pub-tags">
-          <span class="pub-tag">Liver carcinoma</span>
-          <span class="pub-tag">Biomarkers</span>
-          <span class="pub-tag">Cancer genomics</span>
-        </div>
+        <div class="pub-tags"><span class="pub-tag">Liver carcinoma</span><span class="pub-tag">Biomarkers</span><span class="pub-tag">Cancer genomics</span></div>
       </div>
     </div>
     <div class="pub-item">
@@ -804,11 +285,7 @@
       <div>
         <div class="pub-title">Pathway Network Analysis of Genes Involved in Dominant Syndromes</div>
         <div class="pub-meta">Hafeez, S., Aslam, T., & Hasnain, M.J.U.</div>
-        <div class="pub-tags">
-          <span class="pub-tag">Pathway analysis</span>
-          <span class="pub-tag">Network biology</span>
-          <span class="pub-tag">Genetic syndromes</span>
-        </div>
+        <div class="pub-tags"><span class="pub-tag">Pathway analysis</span><span class="pub-tag">Network biology</span><span class="pub-tag">Genetic syndromes</span></div>
       </div>
     </div>
   </div>
@@ -816,46 +293,35 @@
 
 <hr class="section-divider">
 
-<!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label">Open source</div>
   <h2 class="section-title">GitHub <em>projects</em></h2>
-
   <div class="proj-grid">
     <div class="proj-item">
       <div class="proj-num">01</div>
       <div class="proj-title">Single-cell RNA-seq Pipeline</div>
       <div class="proj-desc">End-to-end scRNA-seq workflow: QC, normalization, clustering, marker gene analysis, and visualization. Production-ready and fully documented.</div>
-      <div class="proj-tags">
-        <span class="exp-tag">scRNA-seq</span><span class="exp-tag">R</span><span class="exp-tag">Seurat</span>
-      </div>
+      <div class="proj-tags"><span class="exp-tag">scRNA-seq</span><span class="exp-tag">R</span><span class="exp-tag">Seurat</span></div>
       <a class="proj-link" href="https://github.com/Bioinformatician-dev/single-Cell-RNA-Sequencing" target="_blank">View on GitHub ↗</a>
     </div>
     <div class="proj-item">
       <div class="proj-num">02</div>
       <div class="proj-title">Cancer Genomics Analysis</div>
       <div class="proj-desc">Computational analysis of cancer datasets using R and Bioconductor workflows. Covers differential expression, pathway analysis, and visualization.</div>
-      <div class="proj-tags">
-        <span class="exp-tag">Cancer genomics</span><span class="exp-tag">R</span><span class="exp-tag">Bioconductor</span>
-      </div>
+      <div class="proj-tags"><span class="exp-tag">Cancer genomics</span><span class="exp-tag">R</span><span class="exp-tag">Bioconductor</span></div>
       <a class="proj-link" href="https://github.com/Bioinformatician-dev/Cancer-Genomics" target="_blank">View on GitHub ↗</a>
     </div>
     <div class="proj-item">
       <div class="proj-num">03</div>
       <div class="proj-title">Multi-Omics Data Integration</div>
       <div class="proj-desc">ML-ready integrated datasets with downstream predictive modeling across genomic and transcriptomic layers. Includes feature selection and model evaluation.</div>
-      <div class="proj-tags">
-        <span class="exp-tag">Multi-omics</span><span class="exp-tag">ML</span><span class="exp-tag">Python</span>
-      </div>
+      <div class="proj-tags"><span class="exp-tag">Multi-omics</span><span class="exp-tag">ML</span><span class="exp-tag">Python</span></div>
       <a class="proj-link" href="https://github.com/Bioinformatician-dev/Data-Integration" target="_blank">View on GitHub ↗</a>
     </div>
     <div class="proj-item">
       <div class="proj-num">04</div>
       <div class="proj-title">RNA-seq Analysis Workflow</div>
       <div class="proj-desc">Reproducible bulk RNA-seq pipeline: preprocessing, alignment, and differential expression analysis. Built for scalability and cross-cohort consistency.</div>
-      <div class="proj-tags">
-        <span class="exp-tag">RNA-seq</span><span class="exp-tag">DEA</span><span class="exp-tag">Snakemake</span>
-      </div>
+      <div class="proj-tags"><span class="exp-tag">RNA-seq</span><span class="exp-tag">DEA</span><span class="exp-tag">Snakemake</span></div>
       <a class="proj-link" href="https://github.com/Bioinformatician-dev/RNA-Seq-analysis" target="_blank">View on GitHub ↗</a>
     </div>
   </div>
@@ -863,11 +329,8 @@
 
 <hr class="section-divider">
 
-<!-- TRAINING -->
 <section id="training">
-  <div class="section-label">Continuous learning</div>
   <h2 class="section-title">Workshops & <em>training</em></h2>
-
   <div class="training-list">
     <div class="training-item">
       <div class="training-year">2025</div>
@@ -904,7 +367,7 @@
         <div class="training-org">NUST, Islamabad, Pakistan</div>
       </div>
     </div>
-    <div class="training-item" style="border-bottom:none;">
+    <div class="training-item" style="border-bottom:none">
       <div class="training-year">2019</div>
       <div>
         <div class="training-name">Latest Bioinformatics Tools & Technologies in Genomics</div>
@@ -914,7 +377,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-name">Salma <span>Hafeez</span></div>
   <div class="footer-links">
@@ -926,42 +388,119 @@
 </footer>
 
 <script>
-  // Animate skill bars when they scroll into view
-  const fills = document.querySelectorAll('.skill-fill');
-  const obs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        const el = e.target;
-        const w = el.getAttribute('data-w') || 0.8;
-        el.style.width = (parseFloat(w) * 100) + '%';
-        el.classList.add('animated');
-        obs.unobserve(el);
-      }
-    });
-  }, { threshold: 0.2 });
-  fills.forEach(f => {
-    f.style.width = '0%';
-    f.style.transform = 'none';
-    obs.observe(f);
-  });
+function navTo(id){const el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth',block:'start'})}
 
-  // Fade in sections on scroll
-  const sections = document.querySelectorAll('section, .exp-item');
-  const fadeObs = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-        fadeObs.unobserve(e.target);
-      }
+/* ── DNA HELIX ── */
+(function(){
+  const c=document.getElementById('dnaCanvas');if(!c)return;
+  const ctx=c.getContext('2d'),W=c.width,H=c.height;
+  let t=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    const cx=W/2,amp=78,period=90,pts=55;
+    // strands
+    [[0,'rgba(167,139,250,0.35)'],[Math.PI,'rgba(196,181,253,0.28)']].forEach(([off,col])=>{
+      ctx.beginPath();
+      for(let i=0;i<=pts;i++){const y=(i/pts)*H,ph=(y/period)*Math.PI*2+t+off;if(i===0)ctx.moveTo(cx+Math.sin(ph)*amp,y);else ctx.lineTo(cx+Math.sin(ph)*amp,y)}
+      ctx.strokeStyle=col;ctx.lineWidth=1.8;ctx.stroke();
     });
-  }, { threshold: 0.08 });
-  sections.forEach(s => {
-    s.style.opacity = '0';
-    s.style.transform = 'translateY(16px)';
-    s.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
-    fadeObs.observe(s);
-  });
+    // dots + bridges
+    const bases=['A·T','G·C','T·A','C·G'];
+    for(let i=0;i<=pts;i++){
+      const y=(i/pts)*H,ph=(y/period)*Math.PI*2+t;
+      const x1=cx+Math.sin(ph)*amp,x2=cx+Math.sin(ph+Math.PI)*amp;
+      const a1=0.3+0.7*((Math.sin(ph)+1)/2);
+      ctx.beginPath();ctx.arc(x1,y,4.5,0,Math.PI*2);ctx.fillStyle=`rgba(167,139,250,${a1})`;ctx.fill();
+      const a2=0.3+0.7*((Math.sin(ph+Math.PI)+1)/2);
+      ctx.beginPath();ctx.arc(x2,y,4.5,0,Math.PI*2);ctx.fillStyle=`rgba(196,181,253,${a2})`;ctx.fill();
+      if(i%7===0){
+        const ba=0.12+0.18*Math.abs(Math.sin(ph));
+        ctx.beginPath();ctx.moveTo(x1,y);ctx.lineTo(x2,y);
+        ctx.strokeStyle=`rgba(124,58,237,${ba})`;ctx.lineWidth=1.2;ctx.stroke();
+        ctx.font='9px DM Mono,monospace';ctx.fillStyle=`rgba(167,139,250,${ba*2.5})`;
+        ctx.textAlign='center';ctx.fillText(bases[Math.floor(i/7)%4],cx,y+4);
+      }
+    }
+    // floating labels
+    const floatLabels=[{label:'RNA-seq',x:40,yo:0.15},{label:'GATK',x:320,yo:0.35},{label:'scRNA-seq',x:30,yo:0.6},{label:'Docker',x:310,yo:0.8}];
+    floatLabels.forEach(({label,x,yo})=>{
+      const y=yo*H+Math.sin(t*0.7+yo*10)*6;
+      ctx.font='10px DM Mono,monospace';ctx.fillStyle='rgba(109,95,168,0.6)';ctx.textAlign='left';
+      ctx.fillText(label,x,y);
+    });
+    t+=0.018;requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── NETWORK BANNER ── */
+(function(){
+  const c=document.getElementById('networkCanvas');if(!c)return;
+  c.width=c.parentElement.offsetWidth||1200;c.height=150;
+  const ctx=c.getContext('2d'),W=c.width,H=c.height;
+  const labels=['RNA-seq','scRNA-seq','GATK','DEA','Pathway','Multi-omics','Docker','Snakemake','TCGA','GEO','ML','ChIP-seq','Nextflow','Python','R'];
+  const nodes=labels.map((label,i)=>({
+    x:60+(i/(labels.length-1))*(W-120)+(Math.random()-0.5)*50,
+    y:25+Math.random()*(H-50),
+    vx:(Math.random()-0.5)*0.35,vy:(Math.random()-0.5)*0.35,
+    r:4+Math.random()*3.5,label
+  }));
+  let pulse=0;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    nodes.forEach(n=>{
+      n.x+=n.vx;n.y+=n.vy;
+      if(n.x<30||n.x>W-30)n.vx*=-1;
+      if(n.y<15||n.y>H-15)n.vy*=-1;
+    });
+    // edges
+    for(let i=0;i<nodes.length;i++)for(let j=i+1;j<nodes.length;j++){
+      const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<200){
+        ctx.beginPath();ctx.moveTo(nodes[i].x,nodes[i].y);ctx.lineTo(nodes[j].x,nodes[j].y);
+        ctx.strokeStyle=`rgba(124,58,237,${(1-d/200)*0.3})`;ctx.lineWidth=1;ctx.stroke();
+      }
+    }
+    // pulse dot
+    const ei=Math.floor(pulse/80)%nodes.length;
+    const ej=(ei+3)%nodes.length;
+    const p=(pulse%80)/80;
+    ctx.beginPath();
+    ctx.arc(nodes[ei].x+(nodes[ej].x-nodes[ei].x)*p,nodes[ei].y+(nodes[ej].y-nodes[ei].y)*p,4.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(244,114,182,0.95)';ctx.fill();
+    // second pulse teal
+    const ei2=(ei+7)%nodes.length,ej2=(ei+10)%nodes.length;
+    const p2=((pulse+40)%80)/80;
+    ctx.beginPath();
+    ctx.arc(nodes[ei2].x+(nodes[ej2].x-nodes[ei2].x)*p2,nodes[ei2].y+(nodes[ej2].y-nodes[ei2].y)*p2,3.5,0,Math.PI*2);
+    ctx.fillStyle='rgba(45,212,191,0.9)';ctx.fill();
+    // nodes
+    nodes.forEach(n=>{
+      ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(167,139,250,0.8)';ctx.fill();
+      ctx.strokeStyle='rgba(196,181,253,0.35)';ctx.lineWidth=1;ctx.stroke();
+      ctx.font='10px DM Mono,monospace';ctx.fillStyle='rgba(196,181,253,0.65)';
+      ctx.textAlign='center';ctx.fillText(n.label,n.x,n.y-n.r-4);
+    });
+    pulse++;requestAnimationFrame(draw);
+  }
+  draw();
+  window.addEventListener('resize',()=>{c.width=c.parentElement.offsetWidth;});
+})();
+
+/* ── SKILL BARS ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.width=e.target.getAttribute('data-w')+'%';obs.unobserve(e.target);}});
+},{threshold:0.2});
+document.querySelectorAll('.skill-fill').forEach(f=>obs.observe(f));
+
+/* ── SECTION FADE IN ── */
+const fo=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';fo.unobserve(e.target);}});
+},{threshold:0.06});
+document.querySelectorAll('section,.exp-item').forEach(s=>{
+  s.style.opacity='0';s.style.transform='translateY(16px)';s.style.transition='opacity .55s ease,transform .55s ease';fo.observe(s);
+});
 </script>
 </body>
 </html>
